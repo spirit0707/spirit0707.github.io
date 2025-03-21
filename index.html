@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="style.css" />
+    <title>TODO</title>
+  </head>
+  <body>
+    <header>
+      <h1>Список задач</h1>
+    </header>
+    <main>
+      <section class="task-wrapper">
+        <p>Новая задача</p>
+        <div class="task-input">
+          <input type="text" placeholder="Название задачи..." />
+          <button class="add-new-task-button">+  Добавить</button>
+        </div>
+      </section>
+
+      <section class="task-list">
+        <article class="task-column">
+          <h2 class="task-title backlog">Бэклог</h2>
+          <ul>
+            <li class="task-item backlog">Выучить JS</li>
+            <li class="task-item backlog">Выучить React</li>
+            <li class="task-item backlog">Сделать домашку</li>
+          </ul>
+        </article>
+
+        <article class="task-column">
+          <h2 class="task-title progress">В процессе</h2>
+          <ul>
+            <li class="task-item progress">Выпить смузи</li>
+            <li class="task-item progress">Попить воды</li>
+          </ul>
+        </article>
+
+        <article class="task-column">
+          <h2 class="task-title ready">Готово</h2>
+          <ul>
+            <li class="task-item ready">Позвонить маме</li>
+            <li class="task-item ready">Погладить кота</li>
+          </ul>
+        </article>
+
+        <article class="task-column">
+          <h2 class="task-title trash">Корзина</h2>
+          <ul>
+            <li class="task-item trash">Сходить погулять</li>
+            <li class="task-item trash">Прочитать Войну и Мир</li>
+          </ul>
+          <button class="clear-button">✕  Очистить</button>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
