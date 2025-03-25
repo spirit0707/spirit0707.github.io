@@ -1,0 +1,138 @@
+:root {
+    --background-color: #f0f7ff;
+    --text-color-light: #fff;
+    --primary-color: #3b82f6;
+
+    --backlog-color: #dadada;
+    --process-color: #c4e5ff;
+    --ready-color: #c4ffca;
+    --trash-color: #ffc4c4;
+
+    --backlog-text: #9f9f9f;
+    --process-text: #5e8bfe;
+    --ready-text: #70d540;
+    --trash-text: #fe5e5e;
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: var(--primary-color);
+    display: flex;
+}
+
+h1{
+    color: #fff;
+    padding: 15px 70px;
+}
+
+.new-task{
+    padding: 10px 30px 30px 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 50px 50px 20px 70px;
+    max-width: fit-content;
+}
+
+input {
+    font-size: 15px;
+    padding: 10px 30px 10px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 180px;
+    margin-right: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.new-task button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.trash button {
+    background-color: var(--trash-text);
+    color: var(--text-color-light);
+    padding: 15px 100px;
+    margin-top: 10px;
+}
+
+.task-list {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 0;
+    margin: 70px;
+    justify-content: space-between;
+}
+
+.task-title {
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin: 0px 30px 0px 0px;
+    max-width:fit-content;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-right: 50px;
+}
+
+.task-item {
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 0px 0px 10px;
+    padding: 20px 150px 20px 15px;
+    border-left: 5px solid transparent; 
+}
+
+.backlog h3 {
+    background-color: var(--backlog-color);
+    color: var(--backlog-text);
+}
+
+.process h3 {
+    background-color: var(--process-color);
+    color: var(--process-text);
+}
+
+.ready h3 {
+    background-color: var(--ready-color);
+    color: var(--ready-text);
+}
+
+.trash h3 {
+    background-color: var(--trash-color);
+    color: var(--trash-text);
+}
+
+.backlog .task-item {
+    border-left-color: #dadada;
+}
+
+.process .task-item {
+    border-left-color: #c4e5ff;
+}
+
+.ready .task-item {
+    border-left-color: #c4ffca;
+}
+
+.trash .task-item {
+    border-left-color: #ffc4c4;
+
+}
