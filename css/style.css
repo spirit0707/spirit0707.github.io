@@ -14,13 +14,11 @@
     --trash-text: #fe5e5e;
 }
 
-
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--background-color);
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 header {
@@ -34,10 +32,10 @@ h1{
 }
 
 .new-task{
-    padding: 10px 30px 30px 30px;
+    padding: 20px 30px 40px;
     background-color: #fff;
     border-radius: 10px;
-    margin: 50px 50px 20px 70px;
+    margin: 70px;
     max-width: fit-content;
 }
 
@@ -55,7 +53,7 @@ button {
     border-radius: 8px;
     padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 15px;
 }
 
 .new-task button {
@@ -66,8 +64,8 @@ button {
 .trash button {
     background-color: var(--trash-text);
     color: var(--text-color-light);
-    padding: 15px 100px;
-    margin-top: 10px;
+    padding: 15px 90px;
+    margin-top: 20px auto;
 }
 
 .task-list {
@@ -82,7 +80,6 @@ button {
 .task-title {
     padding: 10px 15px;
     border-radius: 10px;
-    margin: 0px 30px 0px 0px;
     max-width:fit-content;
 }
 
