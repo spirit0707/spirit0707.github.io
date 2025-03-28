@@ -93,10 +93,12 @@ ul {
     background-color: #fff;
     border-radius: 8px;
     margin: 0px 0px 10px;
-    padding: 20px 150px 20px 15px;
+    padding: 10px 15px; 
     border-left: 5px solid transparent; 
+    border-left-color: var(--border-color);
+    word-wrap: break-word; 
+    min-width: 150px; 
 }
-
 .backlog h3 {
     background-color: var(--backlog-color);
     color: var(--backlog-text);
