@@ -79,7 +79,8 @@ button {
     flex-wrap: wrap;
     flex-direction: row;
     margin: 0px 70px 0px 70px;
-    justify-content: space-between;
+    justify-content:flex-start;
+    gap: 20px;
 }
 
 .task-column {

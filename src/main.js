@@ -17,15 +17,17 @@ render(boardComponent, boardContainer);
 
 const boardElement = boardComponent.getElement();
 
-const columnTitles = ['Название блока', 'Название блока', 'Название блока', 'Название блока'];
+// const columnTitles = ['Название блока', 'Название блока', 'Название блока', 'Название блока'];
 
-columnTitles.forEach(title => {
-  const listComponent = new TaskListComponent(title);
-  render(listComponent, boardElement);
+// columnTitles.forEach(title => {
+  for (let i = 0; i < 4; i++) {
+    const title = `Название блока`;
+    const listComponent = new TaskListComponent(title);
+    render(listComponent, boardElement);
 
-  const listElement = listComponent.getElement().querySelector('.task-list');
+    const listElement = listComponent.getElement().querySelector('.task-list');
 
-  for (let j = 0; j < 3; j++) {
-    render(new TaskComponent('Название первой задачи'), listElement);
+    for (let j = 0; j < 3; j++) {
+      render(new TaskComponent('Название первой задачи'), listElement);
+    }
   }
-});
