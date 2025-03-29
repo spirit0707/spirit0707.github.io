@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adelina Molycheva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+    <header>
+        <h1>Список задач</h1>
+    </header>
+
+    <main>
+    <section class="new-task">
+        <form action="/" method="post">
+            <label for="task"><h2>Новая задача</h2></label>
+            <input id="task" type="text" name="new-task" placeholder="Название задачи">
+            <button type="submit" id="add-button">+  Добавить</button>
+        </form>
+    </section>
+
+    <section class="task-list">
+        <section class="task-column backlog">
+            <h3 class="task-title">Бэклог</h3>
+            <ul>
+                <li class="task-item">Сделать Дз</li>
+                <li class="task-item">Выучить JS</li>
+            </ul>
+        </section>
+        
+        <section class="task-column process">
+            <h3 class="task-title">В процессе</h3>
+            <ul>
+                <li class="task-item">Сделать Дз</li>
+                <li class="task-item">Выучить JS</li>
+            </ul>
+        </section>
+        
+        <section class="task-column ready">
+            <h3 class="task-title">Готово</h3>
+            <ul>
+                <li class="task-item">Сделать Дз</li>
+                <li class="task-item">Выучить JS</li>
+            </ul>
+        </section>
+        
+        <section class="task-column trash">
+            <h3 class="task-title">Корзина</h3>
+            <ul>
+                <li class="task-item">Сделать Дз</li>
+                <li class="task-item">Выучить JS</li>
+            </ul>
+            <button type="submit" id="clear-button">✕ Очистить</button>
+        </section>
+        
+
+
+    </section>
+    </main>
+</body>
+</html>
+
+
