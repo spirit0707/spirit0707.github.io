@@ -57,12 +57,15 @@ button {
     border-radius: 8px;
     padding: 10px 20px;
     cursor: pointer;
-
 }
 
 .new-task button {
     background-color: var(--primary-color);
     color: var(--text-color-light);
+}
+
+.new-task button:hover {
+    background-color: #2d7bce;
 }
 
 .trash button {
@@ -73,13 +76,17 @@ button {
     margin-top: 10px;
 }
 
+.trash button:hover {
+    background-color: #c23b3b;
+}
+
 .task-board {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     margin: 0px 70px 0px 70px;
     justify-content:flex-start;
-    gap: 30px;
+    gap: 40px;
 }
 
 .task-column {
@@ -118,6 +125,14 @@ ul {
     min-width: 300px; 
     flex-grow: 1;
     min-height: 60px;
+}
+
+.task-item:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .process h3 {
