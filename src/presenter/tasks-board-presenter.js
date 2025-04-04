@@ -1,6 +1,7 @@
 import TaskComponent from "../view/task-component.js";    
 import TaskListComponent from "../view/tasks-list-component.js";
 import TaskBoardComponent from "../view/task-board-component.js";
+import ClearButtonComponent from "../view/clear-button-component.js";
 
 import {render} from '../framework/render.js'
 
@@ -37,6 +38,11 @@ export default class TaskBoardPresenter {
                 const task = tasksForStatus[j];
                 const taskComponent = new TaskComponent({ task });
                 render(taskComponent, listElement);
+            }
+
+            if (status === 'trash') {
+                const clearButtonComponent = new ClearButtonComponent();
+                render(clearButtonComponent, listComponent.getElement());
             }
         }
     }
