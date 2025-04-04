@@ -3,8 +3,6 @@
     --text-color-light: #fff;
     --primary-color: #3b82f6;
 
-    --border-color: #dadada;
-
     --backlog-color: #dadada;
     --process-color: #c4e5ff;
     --ready-color: #c4ffca;
@@ -114,10 +112,41 @@ ul {
     margin: 0px 0px 10px;
     padding: 10px 15px;
     border-left: 5px solid transparent; 
-    border-left-color: var(--border-color);
     word-break: break-word;
     min-width: 300px; 
     flex-grow: 1;
     min-height: 60px;
 }
 
+.process h3 {
+    background-color: var(--process-color);
+    color: var(--process-text);
+}
+.ready h3 {
+    background-color: var(--ready-color);
+    color: var(--ready-text);
+}
+.trash h3 {
+    background-color: var(--trash-color);
+    color: var(--trash-text);
+}
+.backlog h3 {
+    background-color: var(--backlog-color);
+    color: var(--backlog-text);
+}
+
+.backlog .task-item {
+    border-left-color: var(--backlog-color);
+}
+
+.process .task-item {
+    border-left-color: var(--process-color);
+}
+
+.ready .task-item {
+    border-left-color: var(--ready-color);
+}  
+
+.trash .task-item {
+    border-left-color: var(--trash-color);
+}

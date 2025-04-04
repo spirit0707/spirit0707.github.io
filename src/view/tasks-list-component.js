@@ -1,21 +1,24 @@
 import { createElement } from '../framework/render.js';
+import { StatusLabel } from '../const.js';
 
-function createTaskListTemplate(title) {
+function createTaskListTemplate(status) {
+  const statusLabel = StatusLabel[status];
   return (
-    `<section class="task-column">
-      <h3 class="task-title">${title}</h3>
+    `<section class="task-column ${status}">
+      <h3 class="task-title">${statusLabel}</h3>
       <ul class="task-list"></ul>
     </section>`
   );
 }
 
 export default class TaskListComponent {
-  constructor(title) {
-    this.title = title;
+
+  constructor (status) {
+    this.status = status;
   }
 
   getTemplate() {
-    return createTaskListTemplate(this.title);
+    return createTaskListTemplate(this.status);
   }
 
   getElement() {
