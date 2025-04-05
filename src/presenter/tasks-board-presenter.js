@@ -40,3 +40,8 @@ export default class TaskBoardPresenter {
         });
     }
 }
+
+// #renderTask(task, container) {
+//     const taskComponent = new TaskComponent({ task });
+//     render(taskComponent, container);
+// }
