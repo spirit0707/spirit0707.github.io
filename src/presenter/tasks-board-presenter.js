@@ -3,7 +3,7 @@ import TaskListComponent from "../view/tasks-list-component.js";
 import TaskBoardComponent from "../view/task-board-component.js";
 import ClearButtonComponent from "../view/clear-button-component.js";
 import {render} from '../framework/render.js'
-
+import {Status} from "../const.js";
 export default class TaskBoardPresenter {
     #boardContainer = null;
     #tasksModel = null;
@@ -22,29 +22,20 @@ export default class TaskBoardPresenter {
     
         render(this.#tasksBoardComponent, this.#boardContainer);
 
-        const tasksByStatus = {
-            backlog: this.#boardTasks.filter(task => task.status === 'backlog'),
-            process: this.#boardTasks.filter(task => task.status === 'process'),
-            ready: this.#boardTasks.filter(task => task.status === 'ready'),
-            trash: this.#boardTasks.filter(task => task.status === 'trash'),
-        };
-    
-
-        Object.entries(tasksByStatus).forEach(([status, tasks]) => {
+        Object.values(Status).forEach(status => {
+            const tasks = this.#tasksModel.getTasksByStatus(status);
             const tasksListComponent = new TaskListComponent(status);
             render(tasksListComponent, this.#tasksBoardComponent.getElement());
-    
+        
             const taskListElement = tasksListComponent.getElement();
             tasks.forEach(task => {
                 const taskComponent = new TaskComponent({ task });
                 render(taskComponent, taskListElement);
             });
-
-        if (status === 'trash') {
-            const clearButtonComponent = new ClearButtonComponent();
-            render(clearButtonComponent, tasksListComponent.getElement());
-        }
+    
+            if (status === Status.TRASH) { 
+                render(new ClearButtonComponent(), tasksListComponent.getElement());
+            }
         });
-
     }
 }
