@@ -43,7 +43,7 @@ export default class TaskBoardPresenter {
         const tasksListComponent = new TaskListComponent(status);
         render(tasksListComponent, this.#tasksBoardComponent.element);
     
-        const taskListElement = tasksListComponent.element;
+        const taskListElement = tasksListComponent.element.querySelector('.task-list');
     
         if (tasksForStatus.length === 0) {
             this.#renderEmptyTask(taskListElement);
