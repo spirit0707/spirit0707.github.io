@@ -8,10 +8,8 @@ import TasksModel from "../model/tasks-model.js";
 
 export default class TaskBoardPresenter {
     #boardContainer = null;
-
     #tasksModel = new TasksModel();
     #tasksBoardComponent = new TaskBoardComponent();
-
     #boardTasks = [];
 
     constructor({boardContainer, tasksModel}) {
@@ -21,7 +19,23 @@ export default class TaskBoardPresenter {
 
     init() {
         this.#boardTasks = [...this.#tasksModel.getTasks()];
+        this.#renderBoard();
+        this.#renderTask();
+        this.#renderClearButton();
         
+    }
+
+    #renderTask(task, container) {
+        const taskComponent = new TaskComponent({ task });
+        render(taskComponent, container);
+    }
+
+    #renderClearButton(container) {
+        const clearButtonComponent = new ClearButtonComponent();
+        render(clearButtonComponent, container);
+    }
+
+    #renderBoard() {
         render(this.#tasksBoardComponent, this.#boardContainer);
     
         Object.values(Status).forEach(status => {
@@ -35,13 +49,11 @@ export default class TaskBoardPresenter {
             });
     
             if (status === Status.TRASH) { 
-                render(new ClearButtonComponent(), tasksListComponent.getElement());
+                render(new ClearButtonComponent(), tasksListComponent);
             }
-        });
+        })
+
     }
 }
 
-// #renderTask(task, container) {
-//     const taskComponent = new TaskComponent({ task });
-//     render(taskComponent, container);
-// }
+
