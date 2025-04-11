@@ -33,6 +33,11 @@ export default class TaskBoardPresenter {
         render(clearButtonComponent, container);
     }
 
+    #renderEmptyTask(container) {
+        const emptyTaskComponent = new EmptyTaskComponent();
+        render(emptyTaskComponent, container);
+    }
+
     #renderTasksList(status) {
         const tasksForStatus = this.#tasksModel.getTasksByStatus(status);
         const tasksListComponent = new TaskListComponent(status);
@@ -41,8 +46,7 @@ export default class TaskBoardPresenter {
         const taskListElement = tasksListComponent.element;
     
         if (tasksForStatus.length === 0) {
-            const emptyTaskComponent = new EmptyTaskComponent();
-            render(emptyTaskComponent, taskListElement);
+            this.#renderEmptyTask(taskListElement);
         } else {
             tasksForStatus.forEach(task => {
                 this.#renderTask(task, taskListElement);
