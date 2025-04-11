@@ -2,6 +2,7 @@ import TaskComponent from "../view/task-component.js";
 import TaskListComponent from "../view/tasks-list-component.js";
 import TaskBoardComponent from "../view/task-board-component.js";
 import ClearButtonComponent from "../view/clear-button-component.js";
+import EmptyTaskComponent from "../view/empty-task-component.js";
 import {render} from '../framework/render.js'
 import {Status, StatusLabel} from "../const.js";
 import TasksModel from "../model/tasks-model.js";
@@ -20,9 +21,6 @@ export default class TaskBoardPresenter {
     init() {
         this.#boardTasks = [...this.#tasksModel.getTasks()];
         this.#renderBoard();
-        this.#renderTask();
-        this.#renderClearButton();
-        
     }
 
     #renderTask(task, container) {
@@ -35,24 +33,33 @@ export default class TaskBoardPresenter {
         render(clearButtonComponent, container);
     }
 
+    #renderTasksList(status) {
+        const tasksForStatus = this.#tasksModel.getTasksByStatus(status);
+        const tasksListComponent = new TaskListComponent(status);
+        render(tasksListComponent, this.#tasksBoardComponent.element);
+    
+        const taskListElement = tasksListComponent.element;
+    
+        if (tasksForStatus.length === 0) {
+            const emptyTaskComponent = new EmptyTaskComponent();
+            render(emptyTaskComponent, taskListElement);
+        } else {
+            tasksForStatus.forEach(task => {
+                this.#renderTask(task, taskListElement);
+            });
+        }
+    
+        if (status === Status.TRASH) {
+            this.#renderClearButton(taskListElement);
+        }
+    }
+
     #renderBoard() {
         render(this.#tasksBoardComponent, this.#boardContainer);
     
         Object.values(Status).forEach(status => {
-            const tasksForStatus = this.#tasksModel.getTasksByStatus(status); 
-            const tasksListComponent = new TaskListComponent(status);
-            render(tasksListComponent, this.#tasksBoardComponent.element);
-        
-            tasksForStatus.forEach(task => {
-                const taskComponent = new TaskComponent({ task });
-                render(taskComponent, tasksListComponent.element);
-            });
-    
-            if (status === Status.TRASH) { 
-                render(new ClearButtonComponent(), tasksListComponent);
-            }
-        })
-
+            this.#renderTasksList(status); 
+        });
     }
 }
 

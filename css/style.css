@@ -167,3 +167,16 @@ ul {
 .trash .task-item {
     border-left-color: var(--trash-color);
 }
+
+.empty-task {
+    display: flex; 
+    align-items: center; 
+    margin: 0px 0px 10px;
+    padding: 10px 15px; 
+    min-width: 300px; 
+    min-height: 60px;
+    list-style: none;
+    border: 1px dashed var(--backlog-color); 
+    color: var(--backlog-text); 
+    border-radius: 8px;
+}

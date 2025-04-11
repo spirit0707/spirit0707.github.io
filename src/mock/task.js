@@ -19,11 +19,11 @@ export const tasks = [
         title: "Написать маме",
         status: "process",
     },
-    {
-        id: "5",
-        title: "Выучить JS (если бы)",
-        status: "ready",
-    },
+    // {
+    //     id: "5",
+    //     title: "Выучить JS (если бы)",
+    //     status: "ready",
+    // },
     {
         id: "6",
         title: "Написать пост в курсор",
