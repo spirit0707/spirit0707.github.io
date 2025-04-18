@@ -11,16 +11,20 @@ export default class TaskBoardPresenter {
     #boardContainer = null;
     #tasksModel = new TasksModel();
     #tasksBoardComponent = new TaskBoardComponent();
-    #boardTasks = [];
 
     constructor({boardContainer, tasksModel}) {
         this.#boardContainer = boardContainer;
         this.#tasksModel = tasksModel;
+
+        this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
     }
 
     init() {
-        this.#boardTasks = [...this.#tasksModel.getTasks()];
         this.#renderBoard();
+    }
+
+    get tasks() {
+        return this.#tasksModel.getTasks();
     }
 
     #renderTask(task, container) {
@@ -30,6 +34,9 @@ export default class TaskBoardPresenter {
 
     #renderClearButton(container) {
         const clearButtonComponent = new ClearButtonComponent();
+        clearButtonComponent.element.addEventListener('click', () => {
+            this.clearTrash(); 
+        });
         render(clearButtonComponent, container);
     }
 
@@ -54,7 +61,14 @@ export default class TaskBoardPresenter {
         }
     
         if (status === Status.TRASH) {
-            this.#renderClearButton(taskListElement);
+            const clearButtonComponent = new ClearButtonComponent();
+            if (tasksForStatus.length === 0) {
+                clearButtonComponent.disable(); 
+            }
+            clearButtonComponent.element.addEventListener('click', () => {
+                this.clearTrash();
+            });
+            render(clearButtonComponent, taskListElement);
         }
     }
 
@@ -64,6 +78,30 @@ export default class TaskBoardPresenter {
         Object.values(Status).forEach(status => {
             this.#renderTasksList(status); 
         });
+    }
+
+    #clearBoard() {
+        this.#tasksBoardComponent.element.innerHTML = '';
+        };
+
+    createTask() {
+        const taskTitle = document.querySelector('#task').value.trim();
+        if (!taskTitle) {
+        return;
+        }
+
+        this.#tasksModel.addTask(taskTitle);
+
+        document.querySelector('#add-task').value = '';
+    }
+
+    #handleModelChange() {
+        this.#clearBoard();
+        this.#renderBoard();
+    }
+
+    clearTrash() {
+        this.#tasksModel.clearTrash(); 
     }
 }
 

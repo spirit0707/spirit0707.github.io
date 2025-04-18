@@ -14,4 +14,8 @@ export default class ClearButtonComponent extends AbstractComponent {
     get template() {
         return createClearBtnComponentTemplate();
     }
+
+    disable() {
+        this.element.disabled = true; 
+    }
   }
