@@ -35,8 +35,13 @@ export default class TaskBoardPresenter {
     #renderClearButton(container) {
         const clearButtonComponent = new ClearButtonComponent();
         clearButtonComponent.element.addEventListener('click', () => {
-            this.clearTrash(); 
+            this.clearTrash();
         });
+        
+        if (this.#tasksModel.getTasksByStatus('trash').length === 0) {
+            clearButtonComponent.disable();
+        }
+    
         render(clearButtonComponent, container);
     }
 
@@ -92,7 +97,7 @@ export default class TaskBoardPresenter {
 
         this.#tasksModel.addTask(taskTitle);
 
-        document.querySelector('#add-task').value = '';
+        document.querySelector('#task').value = '';
     }
 
     #handleModelChange() {
@@ -101,7 +106,10 @@ export default class TaskBoardPresenter {
     }
 
     clearTrash() {
-        this.#tasksModel.clearTrash(); 
+        this.#tasksModel.clearTrash();
+    
+        this.#clearBoard();
+        this.#renderBoard();
     }
 }
 
