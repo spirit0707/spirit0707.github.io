@@ -14,7 +14,7 @@ function createTaskListTemplate(status) {
 
 export default class TaskListComponent extends AbstractComponent {
 
-  constructor(status, label, onTaskDrop) {
+  constructor({status, label, onTaskDrop}) {
     super();
     this.status = status;
     this.label = label;
