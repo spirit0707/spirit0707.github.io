@@ -13,14 +13,30 @@ function createTaskListTemplate(status) {
 }
 
 export default class TaskListComponent extends AbstractComponent {
-  #status;
 
-  constructor(status) {
+  constructor(status, label, onTaskDrop) {
     super();
-    this.#status = status;
+    this.status = status;
+    this.label = label;
+    this.#setDropHandler(onTaskDrop);
   }
 
   get template() {
-    return createTaskListTemplate(this.#status);
+    return createTaskListTemplate(this.status, this.label);
   }
+
+  #setDropHandler(onTaskDrop) {
+    const container = this.element;
+
+    container.addEventListener('dragover', (event) => {
+      event.preventDefault();
+    });
+
+    container.addEventListener('drop', (event) => {
+      event.preventDefault();
+      const taskId = event.dataTransfer.getData('text/plain');
+      onTaskDrop(taskId, this.status);
+    });
+  }
+
 }

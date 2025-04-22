@@ -17,5 +17,6 @@ export default class ClearButtonComponent extends AbstractComponent {
 
     disable() {
         this.element.disabled = true; 
+        this.element.classList.add('button-disabled'); 
     }
   }

@@ -76,8 +76,12 @@ button {
     margin-top: 10px;
 }
 
-.trash button:hover {
-    background-color: #c23b3b;
+
+button:disabled,
+.button-disabled {
+    background-color: #ccc; 
+    color: #666; 
+    opacity: 0.6; 
 }
 
 .task-board {
@@ -179,4 +183,54 @@ ul {
     border: 1px dashed var(--backlog-color); 
     color: var(--backlog-text); 
     border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .new-task {
+        margin: 20px;
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .task-board {
+        flex-direction: column;
+        margin: 0 20px;
+        gap: 20px;
+    }
+
+    .task-column {
+        max-width: 100%;
+    }
+
+    .task-column h3 {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .task-list {
+        min-width: 100%;
+    }
+
+    .task-item {
+        min-width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .empty-task {
+        min-width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .trash button {
+        padding: 10px 20px;
+        min-width: 100%;
+        font-size: 14px;
+    }
 }
