@@ -35,8 +35,13 @@ export default class TaskBoardPresenter {
     #renderClearButton(container) {
         const clearButtonComponent = new ClearButtonComponent();
         clearButtonComponent.element.addEventListener('click', () => {
-            this.clearTrash(); 
+            this.clearTrash();
         });
+        
+        if (this.#tasksModel.getTasksByStatus('trash').length === 0) {
+            clearButtonComponent.disable();
+        }
+    
         render(clearButtonComponent, container);
     }
 
@@ -61,14 +66,7 @@ export default class TaskBoardPresenter {
         }
     
         if (status === Status.TRASH) {
-            const clearButtonComponent = new ClearButtonComponent();
-            if (tasksForStatus.length === 0) {
-                clearButtonComponent.disable(); 
-            }
-            clearButtonComponent.element.addEventListener('click', () => {
-                this.clearTrash();
-            });
-            render(clearButtonComponent, taskListElement);
+            this.#renderClearButton(taskListElement); 
         }
     }
 
@@ -92,7 +90,7 @@ export default class TaskBoardPresenter {
 
         this.#tasksModel.addTask(taskTitle);
 
-        document.querySelector('#add-task').value = '';
+        document.querySelector('#task').value = '';
     }
 
     #handleModelChange() {
@@ -101,8 +99,12 @@ export default class TaskBoardPresenter {
     }
 
     clearTrash() {
-        this.#tasksModel.clearTrash(); 
+        this.#tasksModel.clearTrash();
+    
+        this.#clearBoard();
+        this.#renderBoard();
     }
+
 }
 
 
