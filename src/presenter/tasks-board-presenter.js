@@ -111,6 +111,7 @@ export default class TaskBoardPresenter {
         this.#clearBoard();
         this.#renderBoard();
     }
+
 }
 
 

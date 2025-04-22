@@ -40,4 +40,12 @@ export default class TasksModel {
         this.#boardtasks = this.#boardtasks.filter(task => task.status !== 'trash');
         this._notifyObservers(); 
     }
+
+    updateTaskStatus(taskId, newStatus) {
+        const task = this.#boardtasks.find(task => task.id === taskId);
+        if (task) {
+            task.status = newStatus;
+            this._notifyObservers();
+        }
+    }
 }
