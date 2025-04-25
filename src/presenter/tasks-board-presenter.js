@@ -75,10 +75,9 @@ export default class TaskBoardPresenter {
         }
     }
     
-    #handleTaskDrop(taskId, newStatus) {
-        this.#tasksModel.updateTaskStatus(taskId, newStatus);
+    #handleTaskDrop(taskId, newStatus, position) {
+        this.#tasksModel.updateTaskStatus(taskId, newStatus, position);
     }
-
     #renderBoard() {
         render(this.#tasksBoardComponent, this.#boardContainer);
     

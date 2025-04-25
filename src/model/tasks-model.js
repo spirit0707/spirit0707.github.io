@@ -12,16 +12,26 @@ export default class TasksModel {
     getTasksByStatus(status) {
         return this.#boardtasks.filter(task => task.status === status);
     }
-
-    addTask(title) {
+    addTask(title, status = 'backlog', position = null) {
         const newTask = {
             title,
-            status: 'backlog',
+            status,
             id: generateID(),
-    };
-    this.#boardtasks.push(newTask);
-    this._notifyObservers();
-    return newTask;
+        };
+    
+        if (position !== null && position >= 0 && position <= this.#boardtasks.length) {
+            const tasksForStatus = this.getTasksByStatus(status);
+            const indexInStatus = tasksForStatus[position] 
+                ? this.#boardtasks.indexOf(tasksForStatus[position]) 
+                : this.#boardtasks.length;
+    
+            this.#boardtasks.splice(indexInStatus, 0, newTask);
+        } else {
+            this.#boardtasks.push(newTask);
+        }
+    
+        this._notifyObservers();
+        return newTask;
     }
 
     addObserver(observer) {
@@ -41,10 +51,21 @@ export default class TasksModel {
         this._notifyObservers(); 
     }
 
-    updateTaskStatus(taskId, newStatus) {
+    updateTaskStatus(taskId, newStatus, position = null) {
         const task = this.#boardtasks.find(task => task.id === taskId);
         if (task) {
+            this.#boardtasks = this.#boardtasks.filter(t => t.id !== taskId);
+    
             task.status = newStatus;
+    
+
+            const tasksForStatus = this.getTasksByStatus(newStatus);
+            const indexInStatus = position !== null && position >= 0 && position < tasksForStatus.length
+                ? this.#boardtasks.indexOf(tasksForStatus[position])
+                : this.#boardtasks.length;
+    
+            this.#boardtasks.splice(indexInStatus, 0, task);
+    
             this._notifyObservers();
         }
     }
