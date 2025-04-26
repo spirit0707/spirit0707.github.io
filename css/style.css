@@ -77,8 +77,7 @@ button {
 }
 
 
-button:disabled,
-.button-disabled {
+button:disabled {
     background-color: #ccc; 
     color: #666; 
     opacity: 0.6; 
