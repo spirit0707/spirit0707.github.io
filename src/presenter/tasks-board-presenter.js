@@ -4,12 +4,14 @@ import TaskBoardComponent from "../view/task-board-component.js";
 import ClearButtonComponent from "../view/clear-button-component.js";
 import EmptyTaskComponent from "../view/empty-task-component.js";
 import {render} from '../framework/render.js'
-import {Status, StatusLabel} from "../const.js";
-import TasksModel from "../model/tasks-model.js";
+import {Status, StatusLabel, UserAction} from "../const.js";
+import LoadingViewComponent from "../view/loading-view-component.js";
+
 
 export default class TaskBoardPresenter {
+    #loadingComponent = new LoadingViewComponent();
     #boardContainer = null;
-    #tasksModel = new TasksModel();
+    #tasksModel = null;
     #tasksBoardComponent = new TaskBoardComponent();
 
     constructor({boardContainer, tasksModel}) {
@@ -19,7 +21,13 @@ export default class TaskBoardPresenter {
         this.#tasksModel.addObserver(this.#handleModelChange.bind(this));
     }
 
-    init() {
+    async init() {
+        render(this.#loadingComponent, this.#boardContainer);
+
+        await this.#tasksModel.init();
+
+        this.#boardContainer.removeChild(this.#loadingComponent.element);
+        this.#clearBoard();
         this.#renderBoard();
     }
 
@@ -35,7 +43,7 @@ export default class TaskBoardPresenter {
     #renderClearButton(container) {
         const clearButtonComponent = new ClearButtonComponent();
         clearButtonComponent.element.addEventListener('click', () => {
-            this.clearTrash();
+            this.#handleClearBaskerClick();
         });
         
         if (this.#tasksModel.getTasksByStatus('trash').length === 0) {
@@ -75,9 +83,6 @@ export default class TaskBoardPresenter {
         }
     }
     
-    #handleTaskDrop(taskId, newStatus, position) {
-        this.#tasksModel.updateTaskStatus(taskId, newStatus, position);
-    }
     #renderBoard() {
         render(this.#tasksBoardComponent, this.#boardContainer);
     
@@ -90,20 +95,43 @@ export default class TaskBoardPresenter {
         this.#tasksBoardComponent.element.innerHTML = '';
         };
 
-    createTask() {
+    async createTask() {
         const taskTitle = document.querySelector('#task').value.trim();
         if (!taskTitle) {
         return;
         }
-
-        this.#tasksModel.addTask(taskTitle);
-
-        document.querySelector('#task').value = '';
+        try {
+            await this.#tasksModel.addTask(taskTitle);
+            document.querySelector('#task').value = '';
+        } catch (err) {
+            console.error('Ошибка при создании задачи', error);
+        }
     }
 
-    #handleModelChange() {
-        this.#clearBoard();
-        this.#renderBoard();
+    #handleModelChange(event, payload) {
+        switch (event) {
+            case UserAction.ADD_TASK:
+            case UserAction.UPDATE_TASK:
+            case UserAction.DELETE_TASK:
+                this.#clearBoard();
+                this.#renderBoard();
+        }
+    }
+
+    async #handleTaskDrop(taskId, newStatus) {
+        try {
+            await this.#tasksModel.updateTaskStatus(taskId, newStatus);
+        } catch (err) {
+            console.error('Ошибка при обновлении статуса задачи', err);
+        }
+    }
+
+    async #handleClearBaskerClick(){
+        try {
+        await this.#tasksModel.clearTrash();
+        } catch (err) {
+        console.error('Ошибка при очистке корзины', err);
+    }
     }
 
     clearTrash() {
